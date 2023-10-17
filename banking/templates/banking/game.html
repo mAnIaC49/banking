@@ -1,0 +1,44 @@
+{% extends 'banking/layout.html' %}
+{% load static %}
+
+{% block title %}
+    Gaming
+{% endblock %}
+
+{% block body %}
+    <div style="text-align: center; margin-top: 50px;">
+        <div hidden id="loaded">{{ loaded }}</div>
+        {% for person in people %}
+            <div data-person="{{ person }}" id="{{ person }}" class="shadow-lg p-3 mb-5 bg-body-tertiary rounded people" style="width: 200px; height: 370px; display: inline-block; margin-left: 10px; text-align: center; background-color: rgb(255, 75, 145);">
+                <div class="shadow p-3 mb-5 bg-body rounded" style="background-color: rgb(250, 205, 75); font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 20px; margin-top: 20px;">{{ person }}</div>
+                <div> <b class="lead amount" style="font-size: 30px; color: whitesmoke;">{{ amount }}</b> <span class="currency">{{ currency }}</span></div>
+                <div style="height: 40px;">
+                    <div class="add" style="display: none; margin-top: 10px;">
+                        <form class="add-form">
+                            <input min="0" type="number" placeholder="Amount" style="width: 150px; border-color: green;" autofocus required>
+                        </form>
+                    </div>
+                    <div class="deduct" style="display: none; margin-top: 10px;">
+                        <form class="deduct-form">
+                            <input min="0" type="number" placeholder="Amount" style="width: 150px; border-color: red;" autofocus required>
+                        </form>
+                    </div>
+                    <div class="transfer" style="display: none; margin-top: 10px;">
+                        <form class="transfer-form">
+                            <input min="0" type="number" placeholder="Amount" style="width: 150px; border-color: blue;" required autofocus> <br>
+                            <select name="to" class="selection" required>
+                                <option value="" selected disabled>To</option>
+                            </select>
+                            <input type="submit" value="Send">
+                        </form>
+                    </div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <button style="width: 80px;" class="btn btn-success btn-add">Add</button>
+                    <button style="width: 80px;" class="btn btn-danger btn-deduct">Deduct</button><br>
+                    <button style="margin-top: 10px;" class="btn btn-info btn-transfer">Transfer</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
